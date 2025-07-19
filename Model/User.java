@@ -1,7 +1,7 @@
 Class User {
 	private String userName; 
 	private String dateOfBirth;
-	private int height;\
+	private int height;
 	private int weeklyGoal;
 	private Nutrition currNutrition; 
 	private ArrayList<Excerise> mealList;

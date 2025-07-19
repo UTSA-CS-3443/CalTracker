@@ -20,9 +20,8 @@ public class Weight {
 	public getWeightLbs(){
 		return this.weightLbs;
 	}
-	public double convertWeightToKg( double weightLbs){
-		return weightLbs * 0.453592
-	}
+
+	public double convertWeightToKg( double weightLbs){ return weightLbs * 0.453592; } //TODO: ADD TO UML!
 	public setDate(LocalDate date ){
 		this.date = date;
 	}
