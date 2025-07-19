@@ -6,6 +6,7 @@ Class User {
 	private Nutrition currNutrition; 
 	private ArrayList<Excerise> mealList;
 	private ArrayList<Weight> weightChart;
+	//Testing to see if works
 	
 	public User( String userName, String dateOfBirth, int height, int weeklyGoal, ArrayList<Food> mealList, 
 	excerciseList ArrayList<Excercise>, Nutrition currNutrition, ArrayList<Weight> weightChart){
