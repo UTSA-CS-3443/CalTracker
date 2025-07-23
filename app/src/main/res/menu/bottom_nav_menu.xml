@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_weight"
+        android:icon="@drawable/ic_scale"
+        android:title="@string/tab_weight"/>
+
+    <item
+        android:id="@+id/nav_log"
+        android:icon="@drawable/ic_list"
+        android:title="@string/tab_log"/>
+
+    <item
+        android:id="@+id/nav_grid"
+        android:icon="@drawable/ic_grid"
+        android:title="@string/tab_grid"/>
+</menu>
+
