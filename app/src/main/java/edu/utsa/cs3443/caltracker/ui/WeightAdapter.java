@@ -1,19 +1,20 @@
-package edu.utsa.cs3443.weighttracker.ui;
+package edu.utsa.cs3443.caltracker.ui;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-import edu.utsa.cs3443.weighttracker.R;
-import edu.utsa.cs3443.weighttracker.data.WeightEntry;
 
-public class WeightAdapter
-        extends ListAdapter<WeightEntry, WeightAdapter.Holder> {
+import edu.utsa.cs3443.caltracker.R;
+import edu.utsa.cs3443.caltracker.data.WeightEntry;
+
+public class WeightAdapter extends ListAdapter<WeightEntry, WeightAdapter.Holder> {
 
     public interface OnOptionsClick {
         void onOptions(WeightEntry entry, View anchor);
@@ -21,7 +22,6 @@ public class WeightAdapter
 
     private final OnOptionsClick listener;
 
-    //Lets submitList() only redraw things that actually changed instead of refreshing the whole list
     public WeightAdapter(OnOptionsClick listener) {
         super(new DiffUtil.ItemCallback<WeightEntry>() {
             @Override
@@ -36,6 +36,11 @@ public class WeightAdapter
         this.listener = listener;
     }
 
+    /** Brute-force refresh: clear then re-set so rows always rebind */
+    public void forceSubmit(java.util.List<WeightEntry> list) {
+        submitList(null);
+        submitList(list);
+    }
 
     @NonNull @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -61,3 +66,5 @@ public class WeightAdapter
         }
     }
 }
+
+

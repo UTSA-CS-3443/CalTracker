@@ -1,4 +1,4 @@
-package edu.utsa.cs3443.weighttracker;
+package edu.utsa.cs3443.caltracker;
 
 import org.junit.Test;
 

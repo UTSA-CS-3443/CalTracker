@@ -1,4 +1,4 @@
-package edu.utsa.cs3443.weighttracker;
+package edu.utsa.cs3443.caltracker;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -16,9 +16,9 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.components.XAxis;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import edu.utsa.cs3443.weighttracker.data.WeightEntry;
-import edu.utsa.cs3443.weighttracker.data.WeightRepository;
-import edu.utsa.cs3443.weighttracker.ui.WeightAdapter;
+import edu.utsa.cs3443.caltracker.data.WeightEntry;
+import edu.utsa.cs3443.caltracker.data.WeightRepository;
+import edu.utsa.cs3443.caltracker.ui.WeightAdapter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -133,8 +133,9 @@ public class WeightActivity extends AppCompatActivity {
         //  shows all entries (newest first)
         List<WeightEntry> listData = new ArrayList<>(all);
         Collections.reverse(listData);
-        adapter.submitList(listData);
+        adapter.forceSubmit(listData);
         rvEntries.scrollToPosition(0);
+
     }
 
 

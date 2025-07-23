@@ -1,9 +1,9 @@
-package edu.utsa.cs3443.weighttracker;
+package edu.utsa.cs3443.caltracker;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class GridActivity extends AppCompatActivity {
+public class LogActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

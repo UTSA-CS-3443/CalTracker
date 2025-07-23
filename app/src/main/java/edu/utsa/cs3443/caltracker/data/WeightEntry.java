@@ -1,4 +1,4 @@
-package edu.utsa.cs3443.weighttracker.data;
+package edu.utsa.cs3443.caltracker.data;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 public class WeightEntry {

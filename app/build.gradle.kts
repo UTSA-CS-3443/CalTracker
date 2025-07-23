@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "edu.utsa.cs3443.weighttracker"
+    namespace = "edu.utsa.cs3443.caltracker"
     compileSdk = 36
 
     defaultConfig {
