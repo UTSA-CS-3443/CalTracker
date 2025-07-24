@@ -5,6 +5,7 @@ import java.util.List;
  public class WeightRepository {
         private final List<WeightEntry> store = new ArrayList<>();
 
+        //TODO: make this.store = null, removing hardcode.
         public WeightRepository() {
             // Fake entries for testing
             store.add(new WeightEntry(LocalDate.now().minusDays(10), 155));

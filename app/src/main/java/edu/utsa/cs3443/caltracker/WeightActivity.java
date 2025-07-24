@@ -50,7 +50,7 @@ public class WeightActivity extends AppCompatActivity {
 
         // init repo & adapter
         repo = new WeightRepository();
-        adapter = new WeightAdapter((entry, anchor) -> showEntryOptions(entry, anchor));
+        adapter = new WeightAdapter((entry, anchor) -> showEntryOptions(entry, anchor)); //Todo: figure this out, see if it can be removed
         rvEntries.setLayoutManager(new LinearLayoutManager(this));
         rvEntries.setAdapter(adapter);
 
