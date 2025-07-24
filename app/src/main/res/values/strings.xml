@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">WeightTracker</string>
+    <string name="tab_weight">Weight</string>
+    <string name="tab_log">Log</string>
+    <string name="tab_grid">Grid</string>
+    <string name="title_weight_tracker">Weight Tracker</string>
+    <string name="label_weight_chart">Weight Chart</string>
+    <string name="button_add_new_weight">Add New Weight</string>
+    <string name="cancel">Cancel</string>
+    <string name="edit_weight">Edit Weight</string>
+
+</resources>

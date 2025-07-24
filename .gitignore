@@ -1,0 +1,21 @@
+# IDE
+.idea/
+*.iml
+.DS_Store
+
+# Gradle / builds
+.gradle/
+build/
+app/build/
+*/build/
+
+# Local machine config
+local.properties
+
+# NDK / external builds
+.externalNativeBuild/
+.cxx/
+
+# Misc
+captures/
+
