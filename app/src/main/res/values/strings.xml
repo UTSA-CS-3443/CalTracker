@@ -8,5 +8,13 @@
     <string name="button_add_new_weight">Add New Weight</string>
     <string name="cancel">Cancel</string>
     <string name="edit_weight">Edit Weight</string>
+    <string name="grid_home">Grid Home</string>
+    <string name="card_text">card text :)</string>
+    <string name="picture_of_food">picture of food</string>
+    <string name="food_name">Food Name</string>
+    <string name="food">FOOD</string>
+    <string name="image_of_food">Image of Food</string>
+    <string name="placeholder_text">PLACEHOLDER TEXT</string>
+    <string name="add_to_the_log">Add to the log</string>
 
 </resources>
