@@ -1,4 +1,4 @@
-package edu.utsa.cs3443.caltracker.data;
+package edu.utsa.cs3443.caltracker.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

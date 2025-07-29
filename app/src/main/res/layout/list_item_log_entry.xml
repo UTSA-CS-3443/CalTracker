@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Widget.App.CardOutline"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp">
+
+    <RelativeLayout
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Title + calories -->
+        <TextView
+            android:id="@+id/tvEntryMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Meal 1: 230 Cal"
+            android:textSize="16sp"
+            android:textColor="?attr/colorOnBackground"/>
+
+        <!-- options button -->
+        <ImageButton
+            android:id="@+id/btnOptions"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_more_vert"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+
+        <!-- macros line -->
+        <TextView
+            android:id="@+id/tvEntryMacros"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvEntryMain"
+            android:layout_marginTop="6dp"
+            android:text="Fat: 1.5 g  Carbs: 7 g  Fiber: 3 g  Protein 75 g"
+            android:textSize="14sp"
+            android:textColor="?attr/colorOnBackground"/>
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

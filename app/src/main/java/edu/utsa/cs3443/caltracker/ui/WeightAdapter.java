@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import edu.utsa.cs3443.caltracker.R;
-import edu.utsa.cs3443.caltracker.data.WeightEntry;
+import edu.utsa.cs3443.caltracker.model.WeightEntry;
 
 public class WeightAdapter extends ListAdapter<WeightEntry, WeightAdapter.Holder> {
 
