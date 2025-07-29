@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import edu.utsa.cs3443.caltracker.R;
-import edu.utsa.cs3443.caltracker.data.FoodRepository;
+import edu.utsa.cs3443.caltracker.model.FoodRepository;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>  {
     private final Context context;

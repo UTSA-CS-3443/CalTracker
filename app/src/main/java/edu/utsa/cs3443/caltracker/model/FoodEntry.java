@@ -1,4 +1,4 @@
-package edu.utsa.cs3443.caltracker.data;
+package edu.utsa.cs3443.caltracker.model;
 
 import android.icu.text.SimpleDateFormat;
 

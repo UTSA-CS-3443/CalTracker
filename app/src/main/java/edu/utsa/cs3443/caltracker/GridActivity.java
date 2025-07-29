@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import edu.utsa.cs3443.caltracker.data.FoodRepository;
+import edu.utsa.cs3443.caltracker.model.FoodRepository;
 import edu.utsa.cs3443.caltracker.ui.FoodAdapter;
 import edu.utsa.cs3443.caltracker.ui.OnFoodClickListener;
 

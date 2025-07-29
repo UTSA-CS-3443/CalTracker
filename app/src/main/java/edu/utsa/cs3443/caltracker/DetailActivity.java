@@ -12,8 +12,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import edu.utsa.cs3443.caltracker.data.FoodEntry;
-import edu.utsa.cs3443.caltracker.data.FoodRepository;
+import edu.utsa.cs3443.caltracker.model.FoodEntry;
+import edu.utsa.cs3443.caltracker.model.FoodRepository;
 
 public class DetailActivity extends AppCompatActivity {
 
