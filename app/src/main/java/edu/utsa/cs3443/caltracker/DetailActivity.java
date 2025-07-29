@@ -1,6 +1,6 @@
 package edu.utsa.cs3443.caltracker;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,7 +32,7 @@ public class DetailActivity extends AppCompatActivity {
             FoodRepository repo = new FoodRepository();
             FoodEntry foodEntry = repo.getAllFoods().get(pos);
             TextView des =  findViewById(R.id.des);
-            ImageView food = findViewById(R.id.food);
+            //ImageView food = findViewById(R.id.food);
             Button logButton = findViewById(R.id.button2);
 
             des.setText(foodEntry.toString());
