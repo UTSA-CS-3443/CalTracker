@@ -23,6 +23,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+
 public class WeightActivity extends AppCompatActivity {
     private WeightRepository repo;
     private WeightAdapter adapter;
