@@ -2,6 +2,8 @@ package edu.utsa.cs3443.caltracker.model;
 
 import android.icu.text.SimpleDateFormat;
 
+import androidx.annotation.NonNull;
+
 import java.time.Instant;
 import java.util.Date;
 import java.util.Locale;
@@ -110,6 +112,7 @@ public class FoodEntry {
     public void setLogTimestamp(Instant logTimestamp) {
         this.logTimestamp = logTimestamp;
     }
+    @NonNull
     @Override
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault());

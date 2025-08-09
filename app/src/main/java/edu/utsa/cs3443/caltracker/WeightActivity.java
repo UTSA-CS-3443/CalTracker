@@ -50,7 +50,7 @@ public class WeightActivity extends AppCompatActivity {
         bottomNav = findViewById(R.id.bottomNav);
 
         // init repo & adapter
-        repo = new WeightRepository();
+        repo = UserManager.getInstance().getWeightRepository();
         adapter = new WeightAdapter((entry, anchor) -> showEntryOptions(entry, anchor)); //Todo: figure this out, see if it can be removed
         rvEntries.setLayoutManager(new LinearLayoutManager(this));
         rvEntries.setAdapter(adapter);
@@ -71,9 +71,11 @@ public class WeightActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.nav_log) {
             startActivity(new Intent(this, LogActivity.class));
+            finish();
             return true;
         } else if (id == R.id.nav_grid) {
             startActivity(new Intent(this, GridActivity.class));
+            finish();
             return true;
         }
         return false;
