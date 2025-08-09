@@ -1,4 +1,4 @@
-# QuizFreaks
+# CalTracker
 <img width="500" height="500" alt="f969bd96-f94d-4196-9000-d36947cb8d7e" src="https://github.com/user-attachments/assets/cfddb0d3-c1e3-4eef-a073-aea214b5ca2c" />
 
 ## Description
