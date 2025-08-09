@@ -8,6 +8,11 @@ CalTracker allows users to record their weight, diet, and exercise goals with ea
 - **Christopher Delgado** - [Github](https://github.com/PyrotechnicsJY)
 - **Samuel Eliot Arnatt** - [Github](https://github.com/SamminatorGaming)
 
+## UML
+https://drive.google.com/file/d/1m38oyoWgfan6XYnXawQE4hREFWD5LIk9/view?usp=sharing
+<img width="4911" height="2793" alt="ApplicationNationUML-Page-1 drawio" src="https://github.com/user-attachments/assets/4b2fd616-3ca4-49e5-902e-2649b4b9ff90" />
+
+
 ## Installation and Running Instructions
 
 ### Prerequisites
