@@ -26,19 +26,25 @@ Clone the repository inside of Android Studio using the following steps:
 7. Once the application has completed loading, press the green play button in the middle of the screen at the top
 8. Wait for the application to load, once loaded the application will launch and you are free to use the app
 
-### Inside the App
+## Guide:
+##### User Screen
+When you launch the app for the first time, you will be prompted with intro screen so that the app can get to know your metrics and goals. 
 
+##### Weight Screen
+Once you fill in the required information you will be greeted with the Weight screen. This is where you can track your body over time by recording your weight for a given day. The screen provides you with a graph for easy visualization of your progress.
 
+##### Log Screen
+The Log Screen launcher in found in the middle of the bottom navigation bar. This is where you can track your meals and exercises for that day, in future updates, we will add functionality to modify meals and exercises from previous days. At the top, you are reminded of your daily diet goals, aswell as how close you are to reaching them for the day.
 
-...
-
-
+##### Grid Screen
+The Grid Screen is where you can save your usual meals and track their calories, that way you can easily log them throughout your day. The app comes default with common foods and their nutrient profiles, such as Eggs, Chicken Breast, Beef, etc... You can add your own favorite foods overtime, creating a little menu for yourself.
 
 ## Known Issues:
+- Writing to .csv is pending fixes, currently only writes to internal File object to track user data.
+- App allows for unrealistic user input (ex: 99999lbs, 0lbs, etc...)
 
-### Bugs
-
-...
 ### Potential Future Implementations
 
-...
+- Use names to store photos on a server.
+- Edit previous days' meals and exercises.
+- Nightmode
