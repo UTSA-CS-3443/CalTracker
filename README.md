@@ -1,5 +1,5 @@
 # QuizFreaks
-<img width="1024" height="1024" alt="f969bd96-f94d-4196-9000-d36947cb8d7e" src="https://github.com/user-attachments/assets/cfddb0d3-c1e3-4eef-a073-aea214b5ca2c" />
+<img width="500" height="500" alt="f969bd96-f94d-4196-9000-d36947cb8d7e" src="https://github.com/user-attachments/assets/cfddb0d3-c1e3-4eef-a073-aea214b5ca2c" />
 
 ## Description
 CalTracker allows users to record their weight, diet, and exercise goals with ease. Input your metrics + goals so that you can stay on track.
