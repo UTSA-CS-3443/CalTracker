@@ -67,15 +67,15 @@ public class User {
     }
 
     public FoodRepository getFoodRepo() {
-        return this.getFoodRepo();
+        return this.foodRepo;
     }
 
     public LogRepository getLogRepo() {
-        return  this.getLogRepo();
+        return  this.logRepo;
     }
 
     public WeightRepository getWeightRepo() {
-        return  this.getWeightRepo();
+        return  this.weightRepo;
     }
 
     // all the repos have their own methods to access the arraylists, and loading them from the internal storage in their own class
