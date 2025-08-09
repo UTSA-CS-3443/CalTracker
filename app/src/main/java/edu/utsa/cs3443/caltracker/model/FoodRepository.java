@@ -9,6 +9,7 @@ public class FoodRepository {
 
     public FoodRepository( ){
         // for testing layout
+        //TODO ADD FEATURE TO LOAD AND SAVE TO INTERNAL MEMORY
         foodEntries.add( new FoodEntry("Chicken breast",165,3.5,0,0,30.9,100,"grams", Instant.now() ) );
         foodEntries.add(new FoodEntry("Beef (80% lean)", 253, 20.3, 0, 0, 16.8, 100, "grams", Instant.now()));
         foodEntries.add(new FoodEntry("Rice (white)", 130, 0.3, 28.1, 0.3, 2.7, 100, "grams", Instant.now()));

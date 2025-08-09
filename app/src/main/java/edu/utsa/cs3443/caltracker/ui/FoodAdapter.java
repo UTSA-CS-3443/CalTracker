@@ -28,7 +28,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
     @NonNull
     @Override
     public FoodAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // inflate layout and give alook to cards
+        // inflate layout and give a ook to cards
         Log.d("FoodAdapter", "onCreateViewHolder called");
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View v = layoutInflater.inflate(R.layout.recycler_view_card, parent, false);
@@ -48,9 +48,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
     @Override
     public int getItemCount() {
 
-        int count = foodRepo.getAllFoods().size();
-      //  Log.d("FoodAdapter", "getItemCount: " + count);
-        return count;
+        //  Log.d("FoodAdapter", "getItemCount: " + count);
+        return foodRepo.getAllFoods().size();
 
         // for testing
     }
