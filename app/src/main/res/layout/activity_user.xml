@@ -6,18 +6,93 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F0F0F0"
+    android:backgroundTint="#FFFFFF"
     tools:context=".UserActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="386dp"
-        android:layout_height="113dp"
-        android:background="#931515"
-        android:backgroundTint="#FFFFFF"
-        android:text="Welcome to CalTracker! Please input your data "
-        android:textAlignment="textStart"
-        android:textColor="#4B6EE4"
-        android:textSize="34sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:backgroundTint="#94FA9BFF"
+            android:fontFamily="sans-serif-medium"
+            android:text="Welcome to CalTracker! Please input some of your infromation! "
+            android:textAlignment="textStart"
+            android:textColor="#260505"
+            android:textSize="34sp" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameEdit"
+            android:layout_width="match_parent"
+
+            android:layout_height="68dp"
+            android:hint="Enter your name"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/heightEdit"
+            android:layout_width="422dp"
+            android:layout_height="70dp"
+            android:hint="Enter your height"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dateOfBirth"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:hint="Enter date in this format YYYY/MM/DD"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/weightGoal"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:hint="Enter your goal weight"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fiberGoal"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:hint="Enter your fiber goal in grams"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/proteinGoal"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:hint="Enter your protein goal in grams"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/carbGoal"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:hint="Enter your carb goal in grams"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="19dp" />
+
+        <Button
+            android:id="@+id/submitButton"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:backgroundTint="#9792E6"
+            android:text="Submit"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

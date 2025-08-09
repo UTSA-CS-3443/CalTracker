@@ -60,12 +60,9 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder> {
         }
 
         void bind(LogEntry e) {
-            tvMain.setText(e.getDescription() + "  " + e.getCalories() + " Cal");
+            tvMain.setText(new StringBuilder().append(e.getDescription()).append("  ").append(e.getCalories()).append(" Cal").toString());
             tvMacros.setText(
-                    "Fat: "     + e.getFat()     + "g  " +
-                            "Carbs: "   + e.getCarbs()   + "g  " +
-                            "Fiber: "   + e.getFiber()   + "g  " +
-                            "Protein: " + e.getProtein()+ "g"
+                    new StringBuilder().append("Fat: ").append(e.getFat()).append("g  ").append("Carbs: ").append(e.getCarbs()).append("g  ").append("Fiber: ").append(e.getFiber()).append("g  ").append("Protein: ").append(e.getProtein()).append("g").toString()
             );
             btnOptions.setOnClickListener(v ->
                     listener.onEntryAction(e, btnOptions)

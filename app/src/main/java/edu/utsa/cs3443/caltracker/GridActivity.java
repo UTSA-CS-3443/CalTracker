@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +23,7 @@ import java.time.Instant;
 
 import edu.utsa.cs3443.caltracker.model.FoodEntry;
 import edu.utsa.cs3443.caltracker.model.FoodRepository;
+import edu.utsa.cs3443.caltracker.model.User;
 import edu.utsa.cs3443.caltracker.ui.FoodAdapter;
 import edu.utsa.cs3443.caltracker.ui.OnFoodClickListener;
 
@@ -41,7 +41,8 @@ public class GridActivity extends AppCompatActivity  implements OnFoodClickListe
 
 
         // setup food repo and adapter
-        FoodRepository fRepo = new FoodRepository();
+        User tempUser = UserManager.getInstance().getUser();
+        FoodRepository fRepo = tempUser.getFoodRepo();
         FoodAdapter fAdapter = new FoodAdapter(this, fRepo, this);
         recyclerView.setAdapter(fAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -79,20 +80,23 @@ public class GridActivity extends AppCompatActivity  implements OnFoodClickListe
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra("Food_Pos",position);
         startActivity(intent);
+        finish();
     }
     private boolean onNavItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.nav_weight) {
             startActivity(new Intent(this, WeightActivity.class));
+            finish();
             return true;
         } else if (id == R.id.nav_log) {
             startActivity(new Intent(this, LogActivity.class));
+            finish();
             return true;
         } else return id == R.id.nav_grid;
     }
 
 
-    private boolean validateAndCreateFoodEntry(View dialogView) {
+    private void validateAndCreateFoodEntry(View dialogView) {
         try {
             // Get all input values
             EditText nameEdit = dialogView.findViewById(R.id.edit_food_name);
@@ -117,26 +121,26 @@ public class GridActivity extends AppCompatActivity  implements OnFoodClickListe
             if (name.isEmpty()) {
                 nameEdit.setError("Food name is required");
                 nameEdit.requestFocus();
-                return false;
+                return;
             }
 
             if (caloriesStr.isEmpty()) {
                 caloriesEdit.setError("Calories are required");
                 caloriesEdit.requestFocus();
-                return false;
+                return;
             }
 
 
             if (servingSizeStr.isEmpty()) {
                 servingSizeEdit.setError("Serving size is required");
                 servingSizeEdit.requestFocus();
-                return false;
+                return;
             }
 
             if (servingType.isEmpty()) {
                 servingTypeEdit.setError("Serving type is required");
                 servingTypeEdit.requestFocus();
-                return false;
+                return;
             }
 
             // Parse numeric values with defaults for optional fields
@@ -160,18 +164,12 @@ public class GridActivity extends AppCompatActivity  implements OnFoodClickListe
                     Instant.now() // Current timestamp
             );
 
-
-
-
             Toast.makeText(this, "Food entry added successfully!", Toast.LENGTH_SHORT).show();
-            return true;
 
         } catch (NumberFormatException e) {
             Toast.makeText(this, "Please enter valid numbers", Toast.LENGTH_SHORT).show();
-            return false;
         } catch (Exception e) {
             Toast.makeText(this, "Error creating food entry: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            return false;
         }
     }
 }

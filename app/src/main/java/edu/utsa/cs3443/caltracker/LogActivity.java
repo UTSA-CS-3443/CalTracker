@@ -20,6 +20,7 @@ import java.util.List;
 import edu.utsa.cs3443.caltracker.model.LogAdapter;
 import edu.utsa.cs3443.caltracker.model.LogEntry;
 import edu.utsa.cs3443.caltracker.model.LogRepository;
+import edu.utsa.cs3443.caltracker.model.User;
 
 public class LogActivity extends AppCompatActivity {
 
@@ -54,6 +55,7 @@ public class LogActivity extends AppCompatActivity {
         bottomNav            = findViewById(R.id.bottomNav);
 
         // --- init repo & adapter ---
+        User tempUser = UserManager.getInstance().getUser();
         repo = new LogRepository();
         adapter = new LogAdapter((entry, anchorView) -> showEntryOptions(entry, anchorView));
         rvLogEntries.setLayoutManager(new LinearLayoutManager(this));

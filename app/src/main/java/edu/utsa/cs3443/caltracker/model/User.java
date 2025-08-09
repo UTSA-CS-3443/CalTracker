@@ -1,9 +1,9 @@
 package edu.utsa.cs3443.caltracker.model;
 
 public class User {
+    private String name;
     private String dateOfBirth;
     private int height;
-
     private double weeklyGoal;
 
     //private Nutrition currNutrition
@@ -22,6 +22,17 @@ public class User {
         this.logRepo = new LogRepository();
         this.weightRepo = new WeightRepository();
 
+    }
+
+    public User(String name, String dateOfBirth, int height, double weeklyGoal){
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.height = height;
+        this.weeklyGoal = weeklyGoal;
+
+        this.foodRepo =  new FoodRepository();
+        this.logRepo = new LogRepository();
+        this.weightRepo = new WeightRepository();
     }
     public String getDateOfBirth() {
         return dateOfBirth;
@@ -45,6 +56,26 @@ public class User {
 
     public void setWeeklyGoal(double weeklyGoal) {
         this.weeklyGoal = weeklyGoal;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public FoodRepository getFoodRepo() {
+        return this.getFoodRepo();
+    }
+
+    public LogRepository getLogRepo() {
+        return  this.getLogRepo();
+    }
+
+    public WeightRepository getWeightRepo() {
+        return  this.getWeightRepo();
     }
 
     // all the repos have their own methods to access the arraylists, and loading them from the internal storage in their own class
