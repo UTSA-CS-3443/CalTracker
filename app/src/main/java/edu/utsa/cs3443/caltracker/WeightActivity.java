@@ -16,6 +16,8 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.components.XAxis;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import edu.utsa.cs3443.caltracker.model.User;
 import edu.utsa.cs3443.caltracker.model.WeightEntry;
 import edu.utsa.cs3443.caltracker.model.WeightRepository;
 import edu.utsa.cs3443.caltracker.ui.WeightAdapter;
@@ -49,20 +51,29 @@ public class WeightActivity extends AppCompatActivity {
         rvEntries = findViewById(R.id.rvEntries);
         bottomNav = findViewById(R.id.bottomNav);
 
-        // init repo & adapter
-        repo = UserManager.getInstance().getWeightRepository();
-        adapter = new WeightAdapter((entry, anchor) -> showEntryOptions(entry, anchor)); //Todo: figure this out, see if it can be removed
-        rvEntries.setLayoutManager(new LinearLayoutManager(this));
-        rvEntries.setAdapter(adapter);
+        // init repo & adapter - CORRECTED
+        User currentUser = UserManager.getInstance().getUser();
+        if (currentUser != null) {
+            repo = currentUser.getWeightRepo(); // ← Fix: assign to class field
+            adapter = new WeightAdapter((entry, anchor) -> showEntryOptions(entry, anchor));
+            rvEntries.setLayoutManager(new LinearLayoutManager(this));
+            rvEntries.setAdapter(adapter);
 
-        // wire clicks
-        tvStart.setOnClickListener(v -> showDatePicker(tvStart));
-        tvEnd.setOnClickListener(v -> showDatePicker(tvEnd));
-        btnAddNew.setOnClickListener(v -> showAddWeightDialog());
-        bottomNav.setOnNavigationItemSelectedListener(this::onNavItemSelected);
+            // wire clicks
+            tvStart.setOnClickListener(v -> showDatePicker(tvStart));
+            tvEnd.setOnClickListener(v -> showDatePicker(tvEnd));
+            btnAddNew.setOnClickListener(v -> showAddWeightDialog());
+            bottomNav.setOnNavigationItemSelectedListener(this::onNavItemSelected);
 
-        // initial load
-        refreshData();
+            // initial load
+            refreshData();
+        } else {
+            // Handle case where no user is logged in
+            Toast.makeText(this, "Please create a user profile first", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, UserActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private boolean onNavItemSelected(@NonNull MenuItem item) {
