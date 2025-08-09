@@ -7,10 +7,10 @@ public class LogEntry {
     private LocalDate date;
     private String    description;
     private int       calories;   // positive for food, negative for exercise
-    private float     fat, carbs, fiber, protein;
+    private int     fat, carbs, fiber, protein;
 
     public LogEntry(long id, LocalDate date, String description, int calories,
-                    float fat, float carbs, float fiber, float protein) {
+                    int fat, int carbs, int fiber, int protein) {
         this.id = id;
         this.date = date;
         this.description = description;
@@ -26,16 +26,16 @@ public class LogEntry {
     public LocalDate getDate() { return date; }
     public String getDescription() { return description; }
     public int    getCalories() { return calories; }
-    public float  getFat() { return fat; }
-    public float  getCarbs() { return carbs; }
-    public float  getFiber() { return fiber; }
-    public float  getProtein() { return protein; }
+    public int  getFat() { return fat; }
+    public int  getCarbs() { return carbs; }
+    public int  getFiber() { return fiber; }
+    public int  getProtein() { return protein; }
 
     public void setDate(LocalDate date) { this.date = date; }
     public void setDescription(String description) { this.description = description; }
     public void setCalories(int calories) { this.calories = calories; }
-    public void setFat(float fat) { this.fat = fat; }
-    public void setCarbs(float carbs) { this.carbs = carbs; }
-    public void setFiber(float fiber) { this.fiber = fiber; }
-    public void setProtein(float protein) { this.protein = protein; }
+    public void setFat(int fat) { this.fat = fat; }
+    public void setCarbs(int carbs) { this.carbs = carbs; }
+    public void setFiber(int fiber) { this.fiber = fiber; }
+    public void setProtein(int protein) { this.protein = protein; }
 }

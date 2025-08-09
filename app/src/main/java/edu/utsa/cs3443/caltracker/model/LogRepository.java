@@ -7,8 +7,7 @@ import java.util.List;
 public class LogRepository {
     private final List<LogEntry> entries = new ArrayList<>();
 
-    // Example macro‐goals (you can load these from prefs or DB)
-    private final int calorieGoal  = 2000;
+    private final int calorieGoal  = 2000; //todo: LOAD THIS FROM USER CLASS..., MIGHT NOT WANT TO MAKE FINAL...
     private final int fatGoal      = 50;
     private final int carbsGoal    = 328;
     private final int fiberGoal    = 30;

@@ -5,23 +5,43 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
+import edu.utsa.cs3443.caltracker.model.FoodEntry;
 import edu.utsa.cs3443.caltracker.model.LogAdapter;
 import edu.utsa.cs3443.caltracker.model.LogEntry;
 import edu.utsa.cs3443.caltracker.model.LogRepository;
 
 public class LogActivity extends AppCompatActivity {
+
+    private File csvFile;
 
     private TextView tvDate;
     private TextView tvCaloriesConsumed, tvCaloriesBurned, tvCaloriesRemaining;
@@ -32,6 +52,9 @@ public class LogActivity extends AppCompatActivity {
     private LogRepository repo;
     private LogAdapter adapter;
     private LocalDate currentDate;
+    private FloatingActionButton addNewLog;
+    private final List<LogEntry> allEntries = new ArrayList<>();
+
 
     private static final DateTimeFormatter DATE_FMT =
             DateTimeFormatter.ofPattern("M/d/yyyy");
@@ -42,16 +65,17 @@ public class LogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log);
 
         // --- find views ---
-        tvDate               = findViewById(R.id.tvDate);
-        tvCaloriesConsumed   = findViewById(R.id.tvCaloriesConsumed);
-        tvCaloriesBurned     = findViewById(R.id.tvCaloriesBurned);
-        tvCaloriesRemaining  = findViewById(R.id.tvCaloriesRemaining);
-        tvFat                = findViewById(R.id.tvFat);
-        tvCarbs              = findViewById(R.id.tvCarbs);
-        tvFiber              = findViewById(R.id.tvFiber);
-        tvProtein            = findViewById(R.id.tvProtein);
-        rvLogEntries         = findViewById(R.id.rvLogEntries);
-        bottomNav            = findViewById(R.id.bottomNav);
+        tvDate = findViewById(R.id.tvDate);
+        tvCaloriesConsumed = findViewById(R.id.tvCaloriesConsumed);
+        tvCaloriesBurned = findViewById(R.id.tvCaloriesBurned);
+        tvCaloriesRemaining = findViewById(R.id.tvCaloriesRemaining);
+        tvFat = findViewById(R.id.tvFat);
+        tvCarbs = findViewById(R.id.tvCarbs);
+        tvFiber = findViewById(R.id.tvFiber);
+        tvProtein = findViewById(R.id.tvProtein);
+        rvLogEntries = findViewById(R.id.rvLogEntries);
+        bottomNav = findViewById(R.id.bottomNav);
+        addNewLog = findViewById(R.id.add_log);
 
         // --- init repo & adapter ---
         repo = new LogRepository();
@@ -68,50 +92,157 @@ public class LogActivity extends AppCompatActivity {
         bottomNav.setSelectedItemId(R.id.nav_log);
         bottomNav.setOnNavigationItemSelectedListener(this::onNavItemSelected);
 
-        // hardcode for demo purposes
-        repo.addEntry(new LogEntry(
-                1,
-                LocalDate.of(2025, 6, 24),
-                "Meal 1: 230 Cal",
-                230,
-                1.5f,7f,3f,75f
-        ));
-        repo.addEntry(new LogEntry(
-                2,
-                LocalDate.of(2025, 6, 24),
-                "30 g Cereal Ex 150 Cal",
-                150,
-                1.5f,7f,3f,30f
-        ));
-        repo.addEntry(new LogEntry(
-                3,
-                LocalDate.of(2025, 6, 24),
-                "45 g Quick Add 180 Cal",
-                180,
-                0f,0f,0f,45f
-        ));
-        repo.addEntry(new LogEntry(
-                4,
-                LocalDate.of(2025, 6, 24),
-                "Exercise 1 -100 Cal",
-                -100,
-                0f,0f,0f,0f
-        ));
-        repo.addEntry(new LogEntry(
-                5,
-                LocalDate.of(2025, 6, 24),
-                "Meal 2: 330 Cal",
-                330,
-                1.5f,7f,3f,75f
-        ));
 
-        // --- load data for today ---
-        currentDate = LocalDate.of(2025, 6, 24);
-        updateDateHeader();
+        //wire clicks
+        addNewLog.setOnClickListener(v -> showAddLogDialog());
+
+        csvFile = new File(getFilesDir(), "entries.csv");
+        seedCsvFromAssetsIfNeeded("entries.csv"); // copies from assets once, or creates header
+        loadEntries();                             // now reads from INTERNAL file, not assets
+
         refreshData();
 
 
     }
+
+    private void showAddLogDialog() {
+        EditText etDesc    = new EditText(this);
+        EditText etCal     = new EditText(this);
+        EditText etFat     = new EditText(this);
+        EditText etCarbs   = new EditText(this);
+        EditText etFiber   = new EditText(this);
+        EditText etProtein = new EditText(this);
+
+        etDesc.setHint("Description");
+        etCal.setHint("Calories (int; negative ok)");
+        etFat.setHint("Fat (g, int)");
+        etCarbs.setHint("Carbs (g, int)");
+        etFiber.setHint("Fiber (g, int)");
+        etProtein.setHint("Protein (g, int)");
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        int pad = (int) (16 * getResources().getDisplayMetrics().density);
+        layout.setPadding(pad, pad, pad, pad);
+        layout.addView(etDesc);
+        layout.addView(etCal);
+        layout.addView(etFat);
+        layout.addView(etCarbs);
+        layout.addView(etFiber);
+        layout.addView(etProtein);
+
+        new AlertDialog.Builder(this)
+                .setTitle("Add Log")
+                .setView(layout)
+                .setNegativeButton(R.string.cancel, null)
+                .setPositiveButton(android.R.string.ok, (d, wBtn) -> {
+                    String desc = String.valueOf(etDesc.getText()).trim().replace(",", " ");
+                    String sCal = String.valueOf(etCal.getText()).trim();
+                    String sFat = String.valueOf(etFat.getText()).trim();
+                    String sCarbs = String.valueOf(etCarbs.getText()).trim();
+                    String sFiber = String.valueOf(etFiber.getText()).trim();
+                    String sProtein = String.valueOf(etProtein.getText()).trim();
+
+                    try {
+                        int calories = sCal.isEmpty() ? 0 : Integer.parseInt(sCal);
+                        int fat      = sFat.isEmpty() ? 0 : Integer.parseInt(sFat);
+                        int carbs    = sCarbs.isEmpty() ? 0 : Integer.parseInt(sCarbs);
+                        int fiber    = sFiber.isEmpty() ? 0 : Integer.parseInt(sFiber);
+                        int protein  = sProtein.isEmpty() ? 0 : Integer.parseInt(sProtein);
+
+                        LogEntry e = new LogEntry(
+                                System.currentTimeMillis(),
+                                currentDate,
+                                desc, calories, fat, carbs, fiber, protein
+                        );
+
+                        if (appendToCsv(e)) {
+                            repo.addEntry(e);
+                            refreshData();
+                        } else {
+                            Toast.makeText(this, "Failed to save entry.", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } catch (NumberFormatException nfe) {
+                        Toast.makeText(this, "Please enter integers only.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show();
+    }
+
+    private void loadEntries() {
+        allEntries.clear();
+        // (optional) avoid double-adding if loadEntries() somehow runs twice:
+        // load into a temp list, then add to repo only if that id isn’t present.
+
+        try (FileInputStream fis = new FileInputStream(csvFile);
+             Scanner sc = new Scanner(fis)) {
+
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine().trim();
+                if (line.isEmpty() || line.regionMatches(true, 0, "id,", 0, 3)) continue;
+
+                try (Scanner row = new Scanner(line)) {
+                    row.useDelimiter("\\s*,\\s*");
+
+                    long id        = row.nextLong();
+                    LocalDate date = LocalDate.parse(row.next());
+                    String desc    = row.next();
+                    int calories   = row.nextInt();
+                    int fat        = row.nextInt();
+                    int carbs      = row.nextInt();
+                    int fiber      = row.nextInt();
+                    int protein    = row.nextInt();
+
+                    LogEntry e = new LogEntry(id, date, desc, calories, fat, carbs, fiber, protein);
+                    allEntries.add(e);
+
+                    // push into repo so UI sees it
+                    // (optional: skip if same id already in repo to prevent duplicates)
+                    repo.addEntry(e);
+                }
+            }
+        } catch (Exception e) {
+            android.util.Log.e("LogActivity", "Failed to load entries", e);
+        }
+    }
+
+    private void seedCsvFromAssetsIfNeeded(String assetName) {
+        if (csvFile.exists() && csvFile.length() > 0) return;
+
+        try (InputStream in = getAssets().open(assetName);
+             FileOutputStream out = new FileOutputStream(csvFile)) {
+            byte[] buf = new byte[8192];
+            int n;
+            while ((n = in.read(buf)) > 0) out.write(buf, 0, n);
+        } catch (IOException notFound) {
+            // No seed file in assets → create a new one with header
+            try (FileWriter fw = new FileWriter(csvFile, false)) {
+                fw.write("id,date,description,calories,fat,carbs,fiber,protein\n");
+            } catch (IOException e) {
+                android.util.Log.e("LogActivity", "Failed to create entries.csv", e);
+            }
+        }
+    }
+
+    private boolean appendToCsv(LogEntry e) {
+        String line = String.format(Locale.US,
+                "%d,%s,%s,%d,%d,%d,%d,%d%n",
+                e.getId(),
+                e.getDate().toString(),
+                e.getDescription().replace(",", " "), // simple CSV
+                e.getCalories(), e.getFat(), e.getCarbs(), e.getFiber(), e.getProtein());
+
+        try (FileWriter fw = new FileWriter(csvFile, true)) {
+            fw.write(line);
+            return true;
+        } catch (IOException ex) {
+            android.util.Log.e("LogActivity", "appendToCsv failed", ex);
+            return false;
+        }
+    }
+
+
 
     private void updateDateHeader() {
         tvDate.setText("Date " + currentDate.format(DATE_FMT));
@@ -190,8 +321,7 @@ public class LogActivity extends AppCompatActivity {
 
     private void showEditEntryDialog(LogEntry entry) {
         View view = getLayoutInflater().inflate(R.layout.dialog_edit_log_entry, null);
-        // e.g. EditText etAmount = view.findViewById(R.id.etAmount);
-        //      etAmount.setText(String.valueOf(entry.getAmount()));
+
         new AlertDialog.Builder(this)
                 .setTitle("Edit entry")
                 .setView(view)

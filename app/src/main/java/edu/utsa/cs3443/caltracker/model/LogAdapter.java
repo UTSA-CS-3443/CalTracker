@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-// <-- ADD THIS LINE:
 import edu.utsa.cs3443.caltracker.R;
 
 public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder> {
